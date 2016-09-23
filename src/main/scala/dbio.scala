@@ -5,11 +5,11 @@ import scala.concurrent.{ ExecutionContext, Future }
 import scala.util.{ Success => S, Failure => F }
 
 trait DBIOInstances {
-  implicit def dbioInstance(implicit ec: ExecutionContext): MonadError[λ[(α, β) => DBIO[β]], Throwable] =
+  implicit def dbioInstance(implicit ec: ExecutionContext): MonadError[DBIO], Throwable] =
     new DBIOInstance
 }
 
-private class DBIOInstance(implicit ec: ExecutionContext) extends MonadError[λ[(α, β) => DBIO[β]], Throwable] with Catchable[DBIO] {
+private class DBIOInstance(implicit ec: ExecutionContext) extends MonadError[DBIO], Throwable] with Catchable[DBIO] {
 
   def point[A](a: => A): DBIO[A] = DBIO.successful(a)
 
